@@ -40,26 +40,19 @@ All servers can be stopped using
 ./stop-servers.sh
 ```
 
-## Run single service
-
-Don't forget to source the `.env` file when manually starting servers, as the
-environment file contains important variables for the various services to run.
-
-### Run the web server
-
-```console
-source .env
-node web-server.js
-```
-
-This will start a TLS-enabled web server on the address specified in `.env`, by
-default https://localhost:3000
+# ⚠ IMPORTANT ⚠
 
 Don't forget to trust the self-signed certificate _for each one of the
-services_, as this certificate is not trusted by default. You can do this by
-visiting https://localhost:3000/test , clicking on "browse to authentication
-URL" and "browse to API URL", and accepting the self-signed certificates for
-each one of the servers.
+services_, as this certificate is not trusted by default.
+
+You can do this by visiting https://localhost:3000/test , accepting the
+self-signed certificate for this site, then by clicking on "browse to
+authentication URL" and "browse to API URL", and accepting the self-signed
+certificates **for each one of the servers**.
+
+If you don't trust the certificates manually, then the demos will not work.
+Source the `.env` file when manually starting servers, as the environment file
+contains important variables for the various services to run.
 
 # Copyright / License
 

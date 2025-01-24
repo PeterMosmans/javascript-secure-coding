@@ -29,7 +29,7 @@ if [[ -f $PIDFILE ]]; then
 fi
 
 echo -e "${COL_BOLD}1${COL_RESET}/5 - Starting the Cerbos authorization back-end on port ${COL_BOLD}${CERBOS_PORT}${COL_RESET}"
-docker run --name cerbos --rm -it -u ${UID} --publish "$CERBOS_PORT:3592" --volume "$(pwd)/policies:/policies:ro" --detach ghcr.io/cerbos/cerbos:latest
+docker run --name cerbos --rm -it -u ${UID} --publish "$CERBOS_PORT:3592" --volume "$(pwd)/policies:/policies:ro" --detach ghcr.io/cerbos/cerbos:latest 1> /dev/null
 echo -e "${COL_BOLD}2${COL_RESET}/5 - Starting the authentication server"
 node authentication-server.js &
 echo "export PID_AUTHENTICATION=$!" > $PIDFILE
@@ -42,3 +42,5 @@ echo "export PID_WEB=$!" >> $PIDFILE
 echo -e "${COL_BOLD}5${COL_RESET}/5 - Starting the attacker web server"
 node attacker-server.js &
 echo "export PID_ATTACKER=$!" >> $PIDFILE
+echo -e "To stop all services, please run ${COL_BOLD}./stop-servers.sh${COL_RESET}"
+echo

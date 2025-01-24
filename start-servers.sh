@@ -46,7 +46,7 @@ echo "export PID_API=$!" >> $PIDFILE
 echo -e "${COL_BOLD}4${COL_RESET}/5 - Starting the web server on ${COL_BOLD}https://${WEB_HOST}:${WEB_PORT}${COL_RESET}"
 node web-server.js &
 echo "export PID_WEB=$!" >> $PIDFILE
-echo -e "${COL_BOLD}5${COL_RESET}/5 - Starting the attacker web server on ${COL_BOLD}https://${ATTACKER_HOST}:${ATTACKER_PORT}${COL_RESET}"
+echo -e "${COL_BOLD}5${COL_RESET}/5 - Starting the attacker web server on ${COL_BOLD}http://${ATTACKER_HOST}:${ATTACKER_PORT}${COL_RESET}"
 node attacker-server.js &
 echo "export PID_ATTACKER=$!" >> $PIDFILE
 echo -e "To stop all services, please run ${COL_BOLD}./stop-servers.sh${COL_RESET}"

@@ -8,7 +8,7 @@ deliberate security vulnerabilities.
 
 Have `docker`, `node` and optionally `openssl` installed.
 
-## How to install
+## Installation
 
 ```console
 git clone https://github.com/PeterMosmans/javascript-secure-coding \
@@ -18,8 +18,9 @@ git clone https://github.com/PeterMosmans/javascript-secure-coding \
 
 This will:
 
+- clone the repository,
 - check the prerequisites,
-- generate a self-signed certificate if `openssl` is installed,
+- generate a self-signed certificate when `openssl` is installed,
 - copy `defaults/.env` to `.env` (unless there is already a `.env` present), and
 - install the required dependencies.
 
@@ -34,7 +35,8 @@ include modifying your local `hosts` file.
 ```
 
 This will start all servers (including the Docker container) in the background.
-All servers can be stopped using
+
+# ## Stop all servers
 
 ```console
 ./stop-servers.sh
@@ -51,10 +53,11 @@ authentication URL" and "browse to API URL", and accepting the self-signed
 certificates **for each one of the servers**.
 
 If you don't trust the certificates manually, then the demos will not work.
-Source the `.env` file when manually starting servers, as the environment file
-contains important variables for the various services to run.
 
-# Copyright / License
+When manually starting the services, source the `.env` file, as the environment
+file contains important variables required for the various services to run.
+
+# # Copyright / License
 
 Great that you're using this code, hopefully you'll find it useful! All that I'm
 asking is that you properly attribute the author

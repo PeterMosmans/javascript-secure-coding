@@ -8,6 +8,8 @@
 set -e
 # shellcheck disable=SC1091
 source .env
+docker stop cerbos &> /dev/null || true
+
 PIDFILE=servers.pid
 if [[ ! -f $PIDFILE ]]; then
   echo "PID file $PIDFILE doesn't exist... you might want start the servers first"
@@ -15,7 +17,7 @@ if [[ ! -f $PIDFILE ]]; then
 fi
 # shellcheck disable=SC1090
 source $PIDFILE
-docker stop cerbos &> /dev/null || true
+
 kill "$PID_AUTHENTICATION" 2> /dev/null || true
 kill "$PID_API" 2> /dev/null || true
 kill "$PID_WEB" 2> /dev/null || true

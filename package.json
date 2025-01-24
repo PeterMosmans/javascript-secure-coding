@@ -1,0 +1,21 @@
+{
+  "name": "secure-coding-javascript-demo",
+  "version": "1.0.0",
+  "description": "A JavaScript demo application meant to practice secure coding",
+  "author": "Peter Mosmans",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "dependencies": {
+    "@cerbos/http": "^0.20.0",
+    "argon2": "^0.41.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csurf": "^1.10.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "pino": "^9.5.0",
+    "pino-pretty": "^13.0.0"
+  }
+}

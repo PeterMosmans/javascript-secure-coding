@@ -1,0 +1,9 @@
+# Explicity ignore private data
+.env
+localhost.crt
+localhost.key
+servers.pid
+# Ignore local installation
+node_modules/
+# Ignore local configuration settings
+.*

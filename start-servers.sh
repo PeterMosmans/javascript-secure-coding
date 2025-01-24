@@ -9,6 +9,16 @@
 # Stop when encountering an error
 set -e
 
+COL_BOLD="\033[1m"
+COL_RED="\033[0;31m"
+COL_RESET="\033[0m"
+
+if [[ ! -f .env ]]; then
+  echo -e "${COL_RED}No ${COL_BOLD}.env${COL_RESET}${COL_RED} file found${COL_RESET}"
+  echo -e "Please run ${COL_BOLD}./installer.sh${COL_RESET} first"
+  exit 0
+fi
+
 # shellcheck disable=SC1091
 source .env
 PIDFILE=servers.pid
@@ -18,17 +28,17 @@ if [[ -f $PIDFILE ]]; then
   source stop-servers.sh
 fi
 
-echo "Starting the Cerbos authorization back-end on port ${CERBOS_PORT}"
+echo -e "${COL_BOLD}1{$COL_RESET}/5 - Starting the Cerbos authorization back-end on port ${COL_BOLD}${CERBOS_PORT}"
 docker run --name cerbos --rm -it -u ${UID} --publish "$CERBOS_PORT:3592" --volume "$(pwd)/policies:/policies:ro" --detach ghcr.io/cerbos/cerbos:latest
-echo "Starting the authentication server"
+echo -e "${COL_BOLD}2{$COL_RESET}/5 - Starting the authentication server"
 node authentication-server.js &
 echo "export PID_AUTHENTICATION=$!" > $PIDFILE
-echo "Starting the API server"
+echo -e "${COL_BOLD}3{$COL_RESET}/5 - Starting the API server"
 node api-server.js &
 echo "export PID_API=$!" >> $PIDFILE
-echo "Starting the web server"
+echo -e "${COL_BOLD}4{$COL_RESET}/5 - Starting the web server"
 node web-server.js &
 echo "export PID_WEB=$!" >> $PIDFILE
-echo "Starting the attacker web server"
+echo -e "${COL_BOLD}5{$COL_RESET}/5 - Starting the attacker web server"
 node attacker-server.js &
 echo "export PID_ATTACKER=$!" >> $PIDFILE

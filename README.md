@@ -36,7 +36,7 @@ include modifying your local `hosts` file.
 
 This will start all servers (including the Docker container) in the background.
 
-# ## Stop all servers
+## Stop all servers
 
 ```console
 ./stop-servers.sh
@@ -57,7 +57,7 @@ If you don't trust the certificates manually, then the demos will not work.
 When manually starting the services, source the `.env` file, as the environment
 file contains important variables required for the various services to run.
 
-# # Copyright / License
+## Copyright / License
 
 Great that you're using this code, hopefully you'll find it useful! All that I'm
 asking is that you properly attribute the author

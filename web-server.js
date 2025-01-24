@@ -83,7 +83,7 @@ const renderResponse = (left, right, result = "", resultClass = "") =>
     </div>
     <div id="output" class="output inactive"></div>
     <div id="result" class="output ${resultClass}">${result}</div>
-    <div id="footer">PGCM - Built with JavaScript / NodeJS / Express</div>
+    <div id="footer">PGCM - Built with JavaScript / Node.js / Express</div>
   </body>
 </html>`
 

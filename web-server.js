@@ -102,13 +102,19 @@ app.get("/test", (req, res) => {
 })
 
 // Input - output demo
-app.get(["/input", "/"], (req, res) => {
+app.get("/", (req, res) => {
   res.send(renderResponse(SELECT, INPUT))
 })
 
-// Input - output demo with a simple CSP
-app.get(["/input-protected", "/"], (req, res) => {
+// Input - output demo with a simple Content Security Policy
+app.get("/csp", (req, res) => {
   res.set("Content-Security-Policy", "script-src 'self'")
+  res.send(renderResponse(SELECT, INPUT))
+})
+
+// Input - output demo with a slightly more advanced Content Security Policy
+app.get("/frame", (req, res) => {
+  res.set("Content-Security-Policy", "script-src 'self'; frame-src 'none'")
   res.send(renderResponse(SELECT, INPUT))
 })
 

@@ -34,7 +34,7 @@ include modifying your local `hosts` file.
 ./start-servers.sh
 ```
 
-This will start all servers (including the Docker container) in the background.
+This will start all servers in the background, including the Docker container.
 
 ## Stop all servers
 
@@ -63,3 +63,7 @@ Great that you're using this code, hopefully you'll find it useful! All that I'm
 asking is that you properly attribute the author
 ([Peter Mosmans](https://github.com/PeterMosmans)), and respect the
 [GPLv3 license](LICENSE).
+
+This demo uses [Cerbos](https://github.com/cerbos/cerbos) and
+[DOMPurify](https://github.com/cure53/DOMPurify), both licensed under the Apache
+License.

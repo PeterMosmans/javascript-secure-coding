@@ -69,15 +69,9 @@ textarea {
   text-align: right;
 }
 
-a {
-  display: block;
-  text-align: center;
-  padding: 10px;
-  margin: 5px 5px 10px;
-}
-
 input,
 textarea {
+  padding: 10px;
   font-size: 24px;
   color: var(--primary-background);
   font-family: monospace;
@@ -94,10 +88,18 @@ textarea {
   margin: 20px;
 }
 
-a,
 button {
   background-color: var(--action-background);
   color: var(--primary-color);
+}
+
+a {
+  color: var(--action-background);
+  background-color: var(--primary-color);
+  display: block;
+  text-align: center;
+  padding: 10px;
+  margin: 5px 5px 10px;
 }
 
 select {

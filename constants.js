@@ -39,7 +39,7 @@ export const LOGIN = `<input type="text" id="username" placeholder="username" re
 
 export const PERMISSIONS = `<button id="login">Login (reset session)</button>
       <button id="authorize">Validate permissions using token</button>
-     <a href="input">Go to input page</a>
+     <a href="/">Go to input page</a>
       <a href="forms">Go to forms page</a>`
 
 export const FORM = `<form method="POST" action="action">
@@ -47,4 +47,4 @@ export const FORM = `<form method="POST" action="action">
           <button type="submit">Perform action</button>
         </form>
         <a href='login'>Go to login page</a>
-        <a href='input'>Go to input page</a>`
+        <a href='/'>Go to input page</a>`

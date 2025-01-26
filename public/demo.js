@@ -137,15 +137,15 @@ function setWaiting(element) {
 // Set a div to its boolean value and display text
 function setBooleanText(text, truthy) {
   if (window.document.getElementById(resultId)) {
-    document.getElementById(element).textContent = text
+    document.getElementById(resultId).textContent = text
     if (truthy) {
-      document.getElementById(element).style.background =
+      document.getElementById(resultId).style.background =
         "var(--true-background)"
-      document.getElementById(element).style.color = "var(--true-color)"
+      document.getElementById(resultId).style.color = "var(--true-color)"
     } else {
-      document.getElementById(element).style.background =
+      document.getElementById(resultId).style.background =
         "var(--false-background)"
-      document.getElementById(element).style.color = "var(--false-color)"
+      document.getElementById(resultId).style.color = "var(--false-color)"
     }
   }
 }

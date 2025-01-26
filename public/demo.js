@@ -194,13 +194,13 @@ async function doLogin() {
     if (response.ok) {
       userToken = data.token
       setCookie("userToken", userToken)
-      setBooleanText(resultId, "Login successful", true)
+      setBooleanText("Login successful", true)
     } else {
-      setBooleanText(resultId, "Incorrect username and/or password", false)
+      setBooleanText("Incorrect username and/or password", false)
     }
   } catch (error) {
     console.error("Login failed:", error)
-    setBooleanText(resultId, "Failed logging in", false)
+    setBooleanText("Failed logging in", false)
   }
 }
 
@@ -216,12 +216,12 @@ async function validatePermissions(idResource, idPermission) {
     })
     const data = await response.json()
     if (data.isAllowed) {
-      setBooleanText(resultId, "Permission granted", true)
+      setBooleanText("Permission granted", true)
     } else {
-      setBooleanText(resultId, "Sorry, no permission to do that", false)
+      setBooleanText("Sorry, no permission to do that", false)
     }
   } catch (error) {
     console.error("Authorization failed:", error)
-    setBooleanText(resultId, "Failed checking permission", false)
+    setBooleanText("Failed checking permission", false)
   }
 }

@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 // Note that this library is unsupported (!)
 import csrf from "csurf"
 import https from "https"
+// Use validator.js middleware for validation
 import { body, validationResult } from "express-validator"
 import {
   apiUrl,

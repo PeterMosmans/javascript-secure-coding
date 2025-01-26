@@ -143,7 +143,7 @@ app.post(
   [
     body("action")
       .isAlphanumeric("en-US")
-      .withMessage("Action can only contain alphanumerical characters"),
+      .withMessage("Action failed validation"),
   ],
   csrfProtection,
   async (req, res) => {

@@ -25,6 +25,7 @@ function connectEventListeners() {
   const eventMappings = [
     { id: "to-innerhtml", handler: () => setAsInnerHtml() },
     { id: "to-text", handler: () => setAsText() },
+    { id: "to-uri", handler: () => escapeURI() },
     { id: "to-sanitized", handler: () => sanitizeInput() },
     {
       id: "to-sanitized-text",
@@ -84,6 +85,17 @@ function setAsText() {
     document.getElementById(inputId).value
 }
 
+// Escape URI
+function escapeURI() {
+  try {
+    document.getElementById(outputId).textContent = encodeURI(
+      document.getElementById(inputId).value,
+    )
+  } catch (e) {
+    setBooleanText("Invalid URI", false)
+  }
+}
+
 // Inject sanitized variable into a specified element
 function sanitizeInput() {
   const sanitized = DOMPurify.sanitize(document.getElementById(inputId).value)
@@ -108,13 +120,9 @@ function isValidEmail(value) {
 function validateEmail() {
   const email = document.getElementById(inputId).value
   if (isValidEmail(email)) {
-    setBooleanText(
-      resultId,
-      `The address ${email} validates successfully`,
-      true,
-    )
+    setBooleanText(`The address ${email} validates successfully`, true)
   } else {
-    setBooleanText(resultId, "Invalid email address", false)
+    setBooleanText("Invalid email address", false)
   }
 }
 
@@ -127,8 +135,8 @@ function setWaiting(element) {
 }
 
 // Set a div to its boolean value and display text
-function setBooleanText(element, text, truthy) {
-  if (window.document.getElementById(element)) {
+function setBooleanText(text, truthy) {
+  if (window.document.getElementById(resultId)) {
     document.getElementById(element).textContent = text
     if (truthy) {
       document.getElementById(element).style.background =

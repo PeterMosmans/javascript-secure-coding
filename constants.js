@@ -13,15 +13,17 @@ PGCM - (c) 2025 - GPLv3
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Coding in JavaScript - Demo</title>
     <script src="demo.js"></script>
+    <script src="dist/purify.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">`
 
-export const SELECT = `<button id="to-innerhtml">set input as innerHTML output</button>
-        <button id="to-text">set input as text output</button>
+export const SELECT = `<button id="to-innerhtml">set input as innerHTML</button>
+        <button id="to-text">set input as text</button>
+        <button id="to-uri">escape input as URI</button>
         <button id="to-sanitized">sanitize input</button>
-        <button id="to-sanitized-text">sanitize to plaintext</button>
+        <button id="to-sanitized-text">sanitize as plaintext</button>
         <button id="validate-email">Validate as email address</button>
         <a href='login'>Go to login page</a>
         <a href='forms'>Go to forms page</a>`

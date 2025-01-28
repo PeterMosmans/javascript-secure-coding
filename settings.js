@@ -19,10 +19,10 @@ export const httpsOptions = {
 
 // Check that variables are defined as environment variables
 ensureEnvVars(
-  "API_HOST",
-  "API_PORT",
   "ATTACKER_HOST",
   "ATTACKER_PORT",
+  "AUTHZ_HOST",
+  "AUTHZ_PORT",
   "AUTH_HOST",
   "AUTH_PORT",
   "CERBOS_HOST",
@@ -31,12 +31,13 @@ ensureEnvVars(
   "WEB_HOST",
   "WEB_PORT",
 )
-export const apiHost = process.env.API_HOST
-export const apiPort = process.env.API_PORT
-export const apiUrl = `https://${apiHost}:${apiPort}`
+
 export const attackerHost = process.env.ATTACKER_HOST
 export const attackerPort = process.env.ATTACKER_PORT
 export const attackerUrl = `http://${attackerHost}:${attackerPort}`
+export const authzHost = process.env.AUTHZ_HOST
+export const authzPort = process.env.AUTHZ_PORT
+export const authzUrl = `https://${authzHost}:${authzPort}`
 export const authHost = process.env.AUTH_HOST
 export const authPort = process.env.AUTH_PORT
 export const authUrl = `https://${authHost}:${authPort}`

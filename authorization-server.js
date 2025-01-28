@@ -10,8 +10,8 @@ import Cerbos from "@cerbos/http"
 import jwt from "jsonwebtoken"
 import https from "https"
 import {
-  apiPort,
-  apiUrl,
+  authzPort,
+  authzUrl,
   httpsOptions,
   jwtSecret,
   webUrl,
@@ -83,7 +83,7 @@ function ensureEnvVars(...vars) {
 }
 
 // Start the server
-const server = https.createServer(httpsOptions, app).listen(apiPort, () => {
-  console.log(`Authorization server running at https://${apiUrl}`)
+const server = https.createServer(httpsOptions, app).listen(authzPort, () => {
+  console.log(`Authorization server running at https://${authzUrl}`)
   console.log(`Using ${cerbosUrl} as authorization back-end`)
 })

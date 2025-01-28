@@ -39,10 +39,10 @@ echo -e "${COL_BOLD}1${COL_RESET}/5 - Starting the Cerbos authorization back-end
 docker run --name cerbos --rm -it -u ${UID} --publish "$CERBOS_PORT:3592" --volume "$(pwd)/policies:/policies:ro" --detach ghcr.io/cerbos/cerbos:latest 1> /dev/null
 echo -e "${COL_BOLD}2${COL_RESET}/5 - Starting the authentication server on ${COL_BOLD}https://${AUTH_HOST}:${AUTH_PORT}${COL_RESET}"
 node authentication-server.js &
-echo "export PID_AUTHENTICATION=$!" > $PIDFILE
-echo -e "${COL_BOLD}3${COL_RESET}/5 - Starting the API server on ${COL_BOLD}https://${API_HOST}:${API_PORT}${COL_RESET}"
-node api-server.js &
-echo "export PID_API=$!" >> $PIDFILE
+echo "export PID_AUTH=$!" > $PIDFILE
+echo -e "${COL_BOLD}3${COL_RESET}/5 - Starting the authorization server on ${COL_BOLD}https://${AUTHZ_HOST}:${AUTHZ_PORT}${COL_RESET}"
+node authorization-server.js &
+echo "export PID_AUTHZ=$!" >> $PIDFILE
 echo -e "${COL_BOLD}4${COL_RESET}/5 - Starting the web server on ${COL_BOLD}https://${WEB_HOST}:${WEB_PORT}${COL_RESET}"
 node web-server.js &
 echo "export PID_WEB=$!" >> $PIDFILE

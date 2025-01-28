@@ -6,7 +6,7 @@ PGCM - (c) 2025 - GPLv3
 **/
 
 // These variables will be overwritten by the supplied configuration file
-let apiUrl = "http://localhost:3000"
+let authzUrl = "http://localhost:3000"
 let authUrl = "http://localhost:2500"
 let userToken = null
 
@@ -60,10 +60,10 @@ async function loadConfiguration() {
       throw new Error(`Failed to load config: ${response.statusText}`)
     }
     const config = await response.json()
-    apiUrl = config.apiUrl
+    authzUrl = config.authzUrl
     authUrl = config.authUrl
     console.log(
-      `Using ${apiUrl} as API endpoint, and ${authUrl} as authentication endpoint`,
+      `Using ${authUrl} as authentication endpoint, and ${authzUrl} as authorization endpoint`,
     )
     checkCookie()
   } catch (error) {
@@ -209,7 +209,7 @@ async function validatePermissions(idResource, idPermission) {
   const action = document.getElementById(idPermission).value
   try {
     setWaiting(resultId)
-    const response = await fetch(`${apiUrl}/authorize`, {
+    const response = await fetch(`${authzUrl}/authorize`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: userToken, action }),

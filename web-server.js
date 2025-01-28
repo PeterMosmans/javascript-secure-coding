@@ -14,9 +14,9 @@ import https from "https"
 // Use validator.js middleware for validation
 import { body, validationResult } from "express-validator"
 import {
-  apiUrl,
   attackerUrl,
   authUrl,
+  authzUrl,
   httpsOptions,
   jwtSecret,
   webHost,
@@ -52,7 +52,7 @@ app.use(cookieParser())
 
 // Serve a "dynamic" configuration file
 app.get("/config.json", (req, res) => {
-  res.json({ apiUrl: apiUrl, authUrl: authUrl })
+  res.json({ authzUrl: authzUrl, authUrl: authUrl })
 })
 
 // Debug function to display cookie values (if any)
@@ -102,7 +102,7 @@ app.get("/test", (req, res) => {
        <a href='authentication'>Go to authentication page</a>
        <a href='authorization'>Go to authorization page</a>`,
       `<a href="${authUrl}" target="_blank">browse to authentication URL</a>
-       <a href="${apiUrl}" target="_blank">browse to API URL</a>
+       <a href="${authzUrl}" target="_blank">browse to authorization URL</a>
        <a href="${attackerUrl}" target="_blank">browse to attacker URL</a>`,
     ),
   )

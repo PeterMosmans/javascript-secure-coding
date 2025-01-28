@@ -75,7 +75,7 @@ create_certificate() {
 check_hostnames() {
   if which "dig" &> /dev/null; then
     # shellcheck disable=SC2154
-    for hostname in ${WEB_HOST} ${AUTH_HOST} ${API_HOST} ${CERBOS_HOST} ${ATTACKER_HOST}; do
+    for hostname in ${WEB_HOST} ${AUTH_HOST} ${AUTHZ_HOST} ${CERBOS_HOST} ${ATTACKER_HOST}; do
       resolve=$(dig +short "${hostname}")
       if [ -n "${resolve}" ]; then
         echo -e "${hostname} resolves to ${COL_BOLD}${resolve}${COL_RESET}"

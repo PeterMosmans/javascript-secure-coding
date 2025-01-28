@@ -62,7 +62,7 @@ const renderResponse = (target, link) =>
 app.get("/", (req, res) => {
   res.send(
     renderResponse(
-      `${webUrl}/action`,
+      `${webUrl}/authorization`,
       '<a href="/protected">Try out the attack against the protected endpoint</a>',
     ),
   )
@@ -71,7 +71,7 @@ app.get("/", (req, res) => {
 app.get("/protected", (req, res) => {
   res.send(
     renderResponse(
-      `${webUrl}/action-protected`,
+      `${webUrl}/authorization-protected`,
       '<a href="/">Try out the attack against the unprotected endpoint</a>',
     ),
   )

@@ -18,8 +18,8 @@ fi
 # shellcheck disable=SC1090
 source $PIDFILE
 
-kill "$PID_AUTHENTICATION" 2> /dev/null || true
-kill "$PID_API" 2> /dev/null || true
+kill "$PID_AUTH" 2> /dev/null || true
+kill "$PID_AUTHZ" 2> /dev/null || true
 kill "$PID_WEB" 2> /dev/null || true
 kill "$PID_ATTACKER" 2> /dev/null || true
 echo "Removing PID file $PIDFILE..."

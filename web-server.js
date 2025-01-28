@@ -1,3 +1,9 @@
+/**
+Simple web server to practice secure coding in JavaScript
+
+PGCM - (c) 2025 - GPLv3
+**/
+
 import express from "express"
 import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
@@ -44,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-// Dynamic configuration file
+// Serve a "dynamic" configuration file
 app.get("/config.json", (req, res) => {
   res.json({ apiUrl: apiUrl, authUrl: authUrl })
 })
@@ -217,7 +223,7 @@ app.post(
   },
 )
 
-// Perform a specific action
+// Perform a specific action as authenticated user
 app.post("/action", (req, res) => {
   // Read form parameters from the request body
   const { action } = req.body

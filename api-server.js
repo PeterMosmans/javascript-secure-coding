@@ -1,3 +1,8 @@
+/**
+Simple authorization server to practice secure coding in JavaScript
+
+PGCM - (c) 2025 - GPLv3
+**/
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
@@ -65,7 +70,7 @@ app.post("/authorize", async (req, res) => {
 
 // Gracefully deal with standard GET requests
 app.get("/", (req, res) => {
-  res.send("API server up and running")
+  res.send("Authorization server up and running")
 })
 
 function ensureEnvVars(...vars) {
@@ -79,6 +84,6 @@ function ensureEnvVars(...vars) {
 
 // Start the server
 const server = https.createServer(httpsOptions, app).listen(apiPort, () => {
-  console.log(`API server running at https://${apiUrl}`)
+  console.log(`Authorization server running at https://${apiUrl}`)
   console.log(`Using ${cerbosUrl} as authorization back-end`)
 })

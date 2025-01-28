@@ -99,8 +99,8 @@ app.get("/test", (req, res) => {
   res.send(
     renderResponse(
       `<a href='/'>Go to input page</a>
-       <a href='login'>Go to login page</a>
-       <a href='forms'>Go to forms page</a>`,
+       <a href='authentication'>Go to authentication page</a>
+       <a href='authorization'>Go to authorization page</a>`,
       `<a href="${authUrl}" target="_blank">browse to authentication URL</a>
        <a href="${apiUrl}" target="_blank">browse to API URL</a>
        <a href="${attackerUrl}" target="_blank">browse to attacker URL</a>`,
@@ -126,27 +126,64 @@ app.get("/frame", (req, res) => {
 })
 
 // Authentication - authorization demo
-app.get("/login", csrfProtection, (req, res) => {
+app.get("/authentication", csrfProtection, (req, res) => {
   res.send(renderResponse(PERMISSIONS, LOGIN))
 })
 
-// Load both forms
-app.get("/forms", csrfProtection, (req, res) => {
-  res.send(
-    renderResponse(
-      FORM,
-      `    <form method="POST" action="action-protected">
+// Load protected and unprotected form
+app.get(
+  ["/authorization", "/authorization-protected"],
+  csrfProtection,
+  (req, res) => {
+    res.send(
+      renderResponse(
+        FORM,
+        `    <form method="POST" action="authorization-protected">
       <input type="hidden" name="_csrf" value="${req.csrfToken()}">
       <input type="text" name="action" value="that">
       <button type="submit">Perform protected action</button>
     </form>`,
-    ),
-  )
+      ),
+    )
+  },
+)
+
+// Perform a specific action as authenticated user
+app.post("/authorization", (req, res) => {
+  const { action } = req.body
+  if (req.cookies["userToken"]) {
+    const token = req.cookies.userToken
+    try {
+      console.log(`Received action ${action} and token ${token}`)
+      const decoded = jwt.verify(token, jwtSecret)
+      console.log(
+        `Token validated for ${decoded.username}, having role ${decoded.role}`,
+      )
+      return res.send(
+        renderResponse(
+          FORM,
+          `<a href='authorization'>Go to authorization page (load CSRF token)</a>`,
+          `User ${decoded.username} has performed "${action}"`,
+          "true",
+        ),
+      )
+    } catch (err) {}
+  }
+  return res
+    .status(401)
+    .send(
+      renderResponse(
+        FORM,
+        `<a href='authorization'>Go to authorization page (load CSRF token)</a>`,
+        `Did not receive a valid token to perform "${action}"`,
+        "false",
+      ),
+    )
 })
 
-// Perform a protected action
+// Perform a protected action as authenticated user
 app.post(
-  "/action-protected",
+  "/authorization-protected",
   [
     body("action")
       .isAlphanumeric("en-US")
@@ -160,7 +197,7 @@ app.post(
       return res.status(400).send(
         renderResponse(
           FORM,
-          `    <form method="POST" action="action-protected">
+          `    <form method="POST" action="authorization-protected">
       <input type="hidden" name="_csrf" value="${req.csrfToken()}">
       <input type="text" name="action" value="that">
       <button type="submit">Perform protected action</button>
@@ -183,7 +220,7 @@ app.post(
         res.send(
           renderResponse(
             FORM,
-            `    <form method="POST" action="action-protected">
+            `    <form method="POST" action="authorization-protected">
       <input type="hidden" name="_csrf" value="${req.csrfToken()}">
       <input type="text" name="action" value="that">
       <button type="submit">Perform protected action</button>
@@ -196,12 +233,12 @@ app.post(
         return res.status(401).send(
           renderResponse(
             FORM,
-            `    <form method="POST" action="action-protected">
+            `    <form method="POST" action="authorization-protected">
       <input type="hidden" name="_csrf" value="${req.csrfToken()}">
       <input type="text" name="action" value="that">
       <button type="submit">Perform protected action</button>
     </form>`,
-            `Not logged in - sorry"`,
+            `Invalid token`,
             "false",
           ),
         )
@@ -223,52 +260,6 @@ app.post(
   },
 )
 
-// Perform a specific action as authenticated user
-app.post("/action", (req, res) => {
-  // Read form parameters from the request body
-  const { action } = req.body
-  if (req.cookies["userToken"]) {
-    const token = req.cookies.userToken
-    try {
-      console.log(`Received form data ${action} and token ${token}`)
-      const decoded = jwt.verify(token, jwtSecret)
-      console.log(
-        `Token validated for ${decoded.username}, having role ${decoded.role}`,
-      )
-      return res.send(
-        renderResponse(
-          FORM,
-          "<a href='forms'>Go to forms page</a>",
-          `User ${decoded.username} has performed "${action}"`,
-          "true",
-        ),
-      )
-    } catch (err) {
-      console.log(err)
-      return res
-        .status(401)
-        .send(
-          renderResponse(
-            FORM,
-            "<a href='login'>Go to login page</a><a href='forms'>Go to forms page</a>",
-            `Invalid token to perform "${action}"`,
-            "false",
-          ),
-        )
-    }
-  }
-  return res
-    .status(401)
-    .send(
-      renderResponse(
-        FORM,
-        "<a href='login'>Go to login page</a><a href='forms'>Go to forms page</a>",
-        `Did not receive a token to perform "${action}"`,
-        "false",
-      ),
-    )
-})
-
 // Generic error handler
 app.use((err, req, res, next) => {
   if (err.code === "EBADCSRFTOKEN") {
@@ -278,7 +269,7 @@ app.use((err, req, res, next) => {
       .send(
         renderResponse(
           FORM,
-          "<a href='login'>Go to login page</a><a href='forms'>Go to forms page</a>",
+          `<a href='authorization'>Go to authorization page (load CSRF token)</a>`,
           "No cheating (CSRF check failed)",
           "false",
         ),
@@ -289,8 +280,8 @@ app.use((err, req, res, next) => {
       .status(500)
       .send(
         renderResponse(
-          "<a href='login'>Go to login page</a>",
-          "<a href='forms'>Go to forms page</a>",
+          "<a href='authentication'>Go to authentication page</a>",
+          `<a href='authorization'>Go to authorization page (load CSRF token)</a>`,
           "Something went wrong",
           "false",
         ),

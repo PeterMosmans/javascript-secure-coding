@@ -57,6 +57,19 @@ If you don't trust the certificates manually, then the demos will not work.
 When manually starting the services, source the `.env` file, as the environment
 file contains important variables required for the various services to run.
 
+## Architecture
+
+The web server has the following functionality:
+
+- Input output page `/` - dynamically display output, filter, sanitize, and
+  validate data
+- Authentication page `/authentication`: log in, reset session
+- Authorization page `/authorization` - perform an action as authenticated user,
+  validate access permissions of a token
+- Authorization page `/authorization-protected` - perform a protected, validated
+  action as authenticated user, validate access permissions of a token
+- Test page `/test` - Check whether the demo site is correctly functioning
+
 ## Copyright / License
 
 Great that you're using this code, hopefully you'll find it useful! All that I'm

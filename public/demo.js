@@ -204,7 +204,7 @@ async function doLogin() {
   }
 }
 
-// Validate wwhether the (holder of the) token has specific permissions (to a resource)
+// Validate whether the (holder of the) token has specific permissions (to a resource)
 async function validatePermissions(idResource, idPermission) {
   const action = document.getElementById(idPermission).value
   try {

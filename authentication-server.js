@@ -1,3 +1,8 @@
+/**
+Simple authentication server to practice secure coding in JavaScript
+
+PGCM - (c) 2025 - GPLv3
+**/
 import express from "express"
 import bodyParser from "body-parser"
 import jwt from "jsonwebtoken"

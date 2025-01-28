@@ -11,7 +11,7 @@ function ensureEnvVars(...vars) {
 }
 
 // Read the certificate and key for this (...) server
-// Note that usually each server has its own certificate and key
+// Usually each server has its own certificate  / key pair
 export const httpsOptions = {
   key: fs.readFileSync("./localhost.key"),
   cert: fs.readFileSync("./localhost.crt"),

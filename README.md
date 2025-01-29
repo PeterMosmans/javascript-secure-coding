@@ -66,9 +66,14 @@ The web server has the following functionality:
 - Authentication page `/authentication`: log in, reset session
 - Authorization page `/authorization` - perform an action as authenticated user,
   validate access permissions of a token
-- Authorization page `/authorization-protected` - perform a protected, validated
-  action as authenticated user, validate access permissions of a token
+- Protected authorization page `/authorization-protected` - perform a protected,
+  validated action as authenticated user, validate access permissions of a token
 - Test page `/test` - Check whether the demo site is correctly functioning
+
+Furthermore there are a few variations on the input output page:
+
+- `/csp` - Apply a simple Content Security Policy header
+- `/frame` - Apply a bit more advanced Content Security Policy header
 
 ## Copyright / License
 
